@@ -1,0 +1,27 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int k = 2;
+        Map<Integer, Integer> count = new HashMap<>();
+        int left = 0, maxLen = 0;
+
+        for (int right = 0; right < fruits.length; right++) {
+            count.put(fruits[right], count.getOrDefault(fruits[right], 0) + 1);
+
+            while (count.size() > k) {
+                int fruitLeft = fruits[left];
+                count.put(fruitLeft, count.get(fruitLeft) - 1);
+                if (count.get(fruitLeft) == 0) {
+                    count.remove(fruitLeft);
+                }
+                left++;
+            }
+
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+
+        return maxLen;
+    }
+}
