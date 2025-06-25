@@ -1,0 +1,40 @@
+//Given a binary array nums and an integer k, flip at most k 0's.
+
+//Return the maximum number of consecutive 1's after performing the flipping operation.
+
+
+public class MaxConsecutiveOnesIII {
+
+    public static int solve(int arr[], int k) {
+        int max = 0;
+        int start = 0;
+        int end = 0;
+        int s = 0;
+
+        while (end < arr.length) {
+
+            if (arr[end] == 0) {
+                s++;
+            }
+
+            if (s > k) {
+                while (s > k) {
+                    if (arr[start] == 0) {
+                        s--;
+                    }
+                    start++;
+                }
+            }
+            max = Math.max(max, end - start + 1);
+            end++;
+        }
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+
+        int arr[] = {0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1};
+        System.out.println(solve(arr, 3));
+    }
+}
