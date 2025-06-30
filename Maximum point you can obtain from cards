@@ -1,0 +1,21 @@
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        int n=cardPoints.length;
+        int result=0;
+        int frontSum=0;
+        int rearSum=0;
+        
+        for(int i=0; i<k; i++){
+            frontSum+=cardPoints[i];
+        }
+        result=frontSum;
+        
+        for(int i=0; i<k; i++){
+            rearSum+=cardPoints[n-i-1];
+            frontSum-=cardPoints[k-i-1];
+            result=Math.max(result, frontSum+rearSum);
+        }
+        
+        return result;
+    }
+}
