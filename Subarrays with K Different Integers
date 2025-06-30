@@ -1,0 +1,27 @@
+class Solution {
+    public int subarraysWithKDistinct(int[] A, int K) {
+        return countSubArraysWithAtmostKIntegers(A, K)-countSubArraysWithAtmostKIntegers(A, K-1);
+    }
+    private int countSubArraysWithAtmostKIntegers(int[] A, int K){
+        int n=A.length;
+        int count=0;
+        int right=0;
+        int left=0;
+        HashMap<Integer, Integer> hMap=new HashMap<>();
+        
+        while(right<n){
+            int rt=A[right];
+            hMap.put(rt, hMap.getOrDefault(rt, 0)+1);
+            
+            while(hMap.size()>K){
+                hMap.put(A[left], hMap.get(A[left])-1);
+                if(hMap.get(A[left])==0)
+                    hMap.remove(A[left]);
+                left++;
+            }
+            count+=right-left+1;
+            right++;
+        }
+        return count;
+    }
+}
