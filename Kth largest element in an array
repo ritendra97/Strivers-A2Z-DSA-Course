@@ -1,0 +1,26 @@
+
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+
+public class Kthlargestsmallestelementinanarray {
+    
+    public static void kth_Largest_And_Smallest_By_AscendingOrder(int[] arr, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i = 0;i<arr.length;i++){
+            pq.add(arr[i]);
+            if(pq.size()>k){
+                pq.poll();
+            }
+        }
+        Iterator it = pq.iterator();
+        while (it.hasNext()) {
+           System.out.print(it.next() + " ");     
+        }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1,2,6,4,5,3} , k = 3;
+        kth_Largest_And_Smallest_By_AscendingOrder(arr,k);
+    }
+}
