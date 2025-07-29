@@ -1,0 +1,46 @@
+//Find the Majority Element that occurs more than N/2 times
+
+package Array;
+
+class majority{
+    int element;
+    int count;
+
+}
+public class MajorityElement {
+
+    public static void main(String[] args) {
+        int arr[] = {3,2,3,2,2};
+        System.out.println(findMajorityElement(arr));
+    }
+
+    private static int findMajorityElement(int[] arr) {
+
+        majority maj = new majority();
+        maj.element = arr[0];
+        maj.count = 1;
+
+        for(int i =1;i<arr.length;i++){
+
+            if(arr[i] == maj.element){
+                maj.count++;
+            }else{
+                maj.element = arr[i];
+                if(maj.count == 0) {
+                    maj.count = 1;
+                }else{
+                    maj.count--;
+                }
+            }
+        }
+
+        int count = 0;
+        for(int i = 0;i<arr.length;i++){
+            if(arr[i] == maj.element){
+                count++;
+            }
+        }
+
+        return count > arr.length/2 ? maj.element : -1;
+    }
+}
