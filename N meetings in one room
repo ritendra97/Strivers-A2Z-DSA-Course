@@ -1,0 +1,53 @@
+package Greedy;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+class meetigns {
+
+    int start;
+    int end;
+    int pos;
+
+    meetigns(int start, int end, int pos) {
+        this.start = start;
+        this.end = end;
+        this.pos = pos;
+    }
+}
+
+public class Nmeetings {
+
+    public static void main(String[] args) {
+        int start[] = {0, 3, 1, 5, 5, 8};
+        int end[] = {5, 4, 2, 9, 7, 9};
+
+        int n = start.length;
+        System.out.println(nmeetingRoom(start, end, n));
+    }
+
+    public static int nmeetingRoom(int start[], int end[], int n) {
+        meetigns[] meet = new meetigns[n];
+        for (int i = 0; i < n; i++) {
+            meet[i] = new meetigns(start[i], end[i], i + 1);
+        }
+
+        Arrays.sort(meet, new Comparator<meetigns>() {
+            public int compare(meetigns m1, meetigns m2) {
+                return m1.end - m2.end;
+            }
+        });
+
+        int maxMeetings = 1;
+        int m = meet[0].end;
+
+        for (int i = 1; i < n; i++) {
+            int nm = meet[i].start;
+            if (nm > m) {
+                maxMeetings += 1;
+                m = meet[i].end;
+            }
+        }
+        return maxMeetings;
+    }
+}
