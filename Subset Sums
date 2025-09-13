@@ -1,0 +1,29 @@
+
+import java.util.*;
+
+public class SubsetSum {
+
+    public static void main(String[] args) {
+        int N = 3, arr[] = {5, 2, 1};
+        System.out.println(subsetSums(arr, N));
+    }
+
+    static ArrayList< Integer> subsetSums(int[] arr, int N) {
+
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        subsetSumsUtil(arr, ans, 0, 0, N);
+
+        return ans;
+    }
+
+    public static void subsetSumsUtil(int[] arr, ArrayList<Integer> pa, int sum, int index, int N) {
+
+        if (index >= N) {
+            pa.add(sum);
+            return;
+        }
+        subsetSumsUtil(arr, pa, sum + arr[index], index + 1, N);
+        subsetSumsUtil(arr, pa, sum, index + 1, N);
+    }
+}
