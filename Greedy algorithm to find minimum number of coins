@@ -1,0 +1,31 @@
+package Greedy;
+
+import java.util.ArrayList;
+import java.util.stream.Stream;
+
+public class MinimumCoins {
+
+      public static void main(String[] args) {
+          int[] coins = {1, 2, 5, 10, 20, 50, 100, 500, 1000};
+          int V = 93;
+          System.out.println(minCoins(coins, V));
+      }
+
+      private static int minCoins(int[] coins, int V) {
+          int n = coins.length;
+          int res = 0;
+          ArrayList<Integer> ans = new ArrayList<>();
+
+          for(int i = n-1;i>=0;i--){
+
+              while (V>=coins[i]){
+                  V -= coins[i];
+                  res++;
+                  ans.add(coins[i]);
+              }
+          }
+
+          return res;
+      }
+
+}
