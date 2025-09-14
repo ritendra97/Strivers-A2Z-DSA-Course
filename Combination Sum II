@@ -1,0 +1,35 @@
+import java.util.*;
+
+public class combinationSum2 {
+
+    public static void main(String[] args) {
+        int [] candidates = {10,1,2,7,6,1,5};
+        int target = 8;
+
+    }
+
+    public static List < List < Integer >> combinationSum2(int[] candidates, int target) {
+        List < List < Integer >> ans = new ArrayList < > ();
+        Arrays.sort(candidates);
+        findCombinations(0, candidates, target, ans, new ArrayList < > ());
+        return ans;
+    }
+
+    private static void findCombinations(int index, int[] candidates, int target, List<List<Integer>> ans, ArrayList<Integer> arrayList) {
+        
+        if(target==0){
+            ans.add(new ArrayList<>(arrayList));
+            return;
+        }
+
+        for(int i = index;i<candidates.length;i++){
+
+            if(i>index && candidates[i-1]==candidates[i]) continue;
+
+            if(candidates[i]>target) break;
+
+            findCombinations(index+1, candidates, target-candidates[i], ans, arrayList);
+            arrayList.remove(arrayList.size()-1);
+        }
+    }
+}
