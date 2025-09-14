@@ -1,0 +1,38 @@
+
+public class NQueensBacktracking {
+
+    public static void main(String[] args) {
+
+        int n = 4;
+        int chess[][] = new int[4][4];
+        boolean ndiag[] = new boolean[2 * n - 1];
+        boolean rdiag[] = new boolean[2 * n - 1];
+        boolean column[] = new boolean[n];
+        Nqueens(chess, ndiag, rdiag, column, 0, n, "");
+    }
+
+    private static void Nqueens(int chess[][], boolean ndiag[], boolean rdiag[],
+            boolean[] column, int row, int n, String psf) {
+
+        if (row == chess.length) {
+            System.err.println(psf);
+            return;
+        }
+
+        for (int col = 0; col < chess.length; col++) {
+
+            if (column[col] == false && ndiag[col + row] == false && rdiag[row - col + n - 1] == false) {
+
+                column[col] = true;
+                ndiag[col + row] = true;
+                rdiag[row - col + n - 1] = true;
+
+                Nqueens(chess, ndiag, rdiag, column, row + 1, n, psf + row + "-" + col + " ");
+
+                column[col] = false;
+                ndiag[col + row] = false;
+                rdiag[row - col + n - 1] = false;
+            }
+        }
+    }
+}
