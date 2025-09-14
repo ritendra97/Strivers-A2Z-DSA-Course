@@ -1,0 +1,51 @@
+
+import java.util.Scanner;
+
+public class NQueensRecursion {
+
+    public static void main(String[] args) {
+        //Scanner sc = new Scanner(System.in);
+        //int n = sc.nextInt();
+        int chess[][] = new int[4][4];
+        printNQueens(chess, "", 0);
+    }
+
+    private static void printNQueens(int[][] chess, String psf, int row) {
+
+        if (row == chess.length) {
+            System.err.println(psf);
+            return;
+        }
+
+        for (int col = 0; col < chess.length; col++) {
+
+            if (isSafeQueen(chess, row, col)) {
+                chess[row][col] = 1;
+                printNQueens(chess, psf + row + "-" + col + " ", row + 1);
+                chess[row][col] = 0;
+            }
+        }
+    }
+
+    private static boolean isSafeQueen(int chess[][], int row, int col) {
+
+        for (int r = row - 1, c = col; r >= 0; r--) {
+            if (chess[r][c] == 1) {
+                return false;
+            }
+        }
+
+        for (int r = row - 1, c = col - 1; r >= 0 && c >= 0; r--, c--) {
+            if (chess[r][c] == 1) {
+                return false;
+            }
+        }
+
+        for (int r = row - 1, c = col + 1; r >= 0 && c < chess.length; r--, c++) {
+            if (chess[r][c] == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
