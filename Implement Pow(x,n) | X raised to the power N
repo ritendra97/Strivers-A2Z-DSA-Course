@@ -1,0 +1,28 @@
+
+public class ImplementPowxn {
+
+    public static void main(String[] args) {
+        System.out.println(myPow(2,10));        
+    }
+
+    private static Double myPow(int ele, int power) {
+        
+        double ans = 1.0;
+        int pw = power;
+        
+        while(pw>0){
+
+            if(pw%2==0){
+                ele = ele*ele;
+                pw = pw/2;
+            }else{
+                ans = ans*ele;
+                pw = pw-1;
+            }
+        }
+
+        if (power < 0) ans = (double)(1.0) / (double)(ans);
+        return ans;
+    }
+
+}
