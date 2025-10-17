@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class BackTracking {
+
+	public static void permuteUtil(int[] nums, List<Integer> curr, List<List<Integer>> ans, boolean visited[]) {
+
+		if (curr.size() == nums.length) {
+			ans.add(new ArrayList(curr));
+			return;
+		}
+
+		for (int i = 0; i < nums.length; i++) {
+
+			if (visited[i])
+				continue;
+			curr.add(nums[i]);
+			visited[i] = true;
+			permuteUtil(nums, curr, ans, visited);
+			curr.remove(curr.size() - 1);
+			visited[i] = false;
+		}
+	}
+
+	public static List<List<Integer>> permute(int[] nums) {
+
+		List<List<Integer>> ans = new ArrayList<List<Integer>>();
+		List<Integer> curr = new ArrayList<Integer>();
+		boolean visited[] = new boolean[nums.length];
+
+		permuteUtil(nums, curr, ans, visited);
+
+		return ans;
+
+	}
+
+	public static void main(String[] args) {
+
+		int candidates[] = { 1,2,3 };
+
+		System.out.println(permute(candidates));
+	}
+}
