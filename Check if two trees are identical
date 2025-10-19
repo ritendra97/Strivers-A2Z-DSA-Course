@@ -1,0 +1,19 @@
+
+public class Checkiftwotreesareidentical {
+
+    public static void main(String[] args){
+
+        Node root = new Node(3);
+        root.left = new Node(1);
+        root.right = new Node(2);
+    }
+
+    private static boolean isidentical(Node p, Node q){
+
+        if(p==null && q==null) return true;
+
+        if(p==null || q==null) return false;
+         if (p.data != q.data) return false;
+         return isidentical(p.right, q.right) && isidentical(p.left, q.left);
+    }
+}
