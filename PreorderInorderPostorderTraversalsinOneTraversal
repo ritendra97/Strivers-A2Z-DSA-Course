@@ -1,0 +1,47 @@
+import java.util.Stack;
+
+class pair{
+    int state;
+    Node node;
+    pair(int state, Node node){
+        this.state = state;
+        this.node = node;
+    }
+}
+
+public class PreorderInorderPostorderTraversalsinOneTraversal {
+
+    public static void main(String[] args) {
+        Integer arr[] = {50,25,12,null,null,37,30,null,null,null,75,62,null,70,null,null,87,null,null};
+    }
+
+    private static void inorder(Integer[] arr){
+        Node root = new Node(arr[0]);
+        Stack<pair> st = new Stack<>();
+
+        st.push(new pair(1,root));
+
+        int i = 0;
+        while(!st.isEmpty()){
+            pair p = st.pop();
+
+            if(p.state==1){
+                i++;
+                if(arr[i]!=null){
+                    p.node.left = new Node(arr[i]);
+                    st.push(new pair(1, p.node.left));
+                }
+                p.state++;
+            }else if(p.state==2){
+                i++;
+                if(arr[i]!=null){
+                    p.node.right = new Node(arr[i]);
+                    st.push(new pair(1, p.node.right));
+                }
+                p.state++;
+            }else{
+                st.pop();
+            }
+        }
+    }
+}
