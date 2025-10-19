@@ -1,0 +1,46 @@
+import java.util.ArrayList;
+
+public class MorristraversalforInorder {
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        inOrder(root);
+    }
+
+    private static void inOrder(Node root) {
+
+        Node curr = root;
+        ArrayList<Integer> res = new ArrayList<>();
+        while (curr != null) {
+
+            if (curr.left == null) {
+                res.add(curr.data);
+                curr = curr.right;
+            } else {
+
+                Node pred = curr.left;
+                while (pred.right != null && pred.right != curr) {
+                    pred = pred.right;
+                }
+
+                if (pred.right == null) {
+
+                    pred.right = curr;
+                    curr = curr.left;
+                } else {
+
+                    pred.right = null;
+                    res.add(curr.data);
+                    curr = curr.right;
+                }
+            }
+        }
+
+        System.out.println(res);
+    }
+
+}
