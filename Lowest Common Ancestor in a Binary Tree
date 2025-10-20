@@ -1,0 +1,32 @@
+public class LowestCommonAncestorinaBinaryTree {
+
+    public static void main(String[] args) {
+        Node root = new Node(3);
+        root.left = new Node(1);
+        root.right = new Node(2);
+
+    }
+
+    private static Node LCA(Node root, int n1, int n2){
+
+        if(root==null )
+			return null;
+
+        if(root.data==n1 || root.data==n2) return root;
+
+        Node l = LCA(root.left, n1, n2);
+        Node r = LCA(root.right, n1, n2);
+
+        if(l!=null){
+            return l;
+        }
+
+        if(r!=null) return r;
+
+        if(l!=null && r!=null) return root;
+
+        return null;
+    }
+
+
+}
