@@ -1,0 +1,28 @@
+package BinarySearchTree;
+
+import java.util.HashSet;
+import java.util.Set;
+
+
+public class FindapairwithagivensuminBST {
+
+    public static void main(String[] args) {
+        
+    }
+
+    public boolean twoSumBST(Node root, int k) {
+        return twoSumBSTUtills(root, k, new HashSet<>());
+    }
+
+
+    public boolean twoSumBSTUtills(Node root, int k, Set<Integer> set) {
+        
+        if(root==null) return false;
+
+        if(set.contains(root.val-k)) return true;
+        set.add(root.val);
+
+        return twoSumBSTUtills(root, k, set) || twoSumBSTUtills(root, k, set);
+
+    }
+}
