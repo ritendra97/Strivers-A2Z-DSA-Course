@@ -1,0 +1,29 @@
+package BinarySearchTree;
+
+public class ConstructaBSTfromapreordertraversal {
+
+    public static void main(String[] args) {
+        int pre[] = {10, 5, 1, 7, 40, 50};
+    }
+
+    private static Node constructBST(int[] pre) {
+        return constructBSTUtills(pre, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private static Node constructBSTUtills(int[] pre, int index, int min, int max) {
+
+        if (index >= pre.length)
+            return null;
+
+        int key = pre[index++];
+        if (key <= min || key >= max)
+            return null;
+
+        Node root = new Node(key);
+
+        root.left = constructBSTUtills(pre, index, min, key);
+        root.right = constructBSTUtills(pre, index, key, max);
+
+        return root;
+    }
+}
