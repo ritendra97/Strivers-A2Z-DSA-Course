@@ -1,0 +1,49 @@
+package Sorting;
+
+public class QuickSort {
+
+    public static int quicksortUtill(int arr[],int left,int right) {
+
+        int pivote = arr[right];
+        int pindex = left;
+
+        for(int i=left;i<right;i++) {
+            if(pivote>=arr[i]) {
+
+                int temp = arr[pindex];
+                arr[pindex] = arr[i];
+                arr[i] = temp;
+                pindex++;
+            }
+        }
+
+        int temp = arr[pindex];
+        arr[pindex] = arr[right];
+        arr[right] = temp;
+
+        return pindex;
+    }
+
+    public static void quicksort(int arr[],int start,int end) {
+
+        if(start<end) {
+
+            int index = quicksortUtill(arr,start,end);
+            quicksort(arr,start,index-1);
+            quicksort(arr,index+1,end);
+        }
+    }
+    public static void printarr(int arr[]) {
+        for(int j:arr) {
+            System.out.println(j);
+        }
+    }
+    public static void main(String args[]) {
+
+        int arr[] = { 11,9,12,7,3};
+        int n = arr.length;
+        quicksort(arr,0,n-1);
+        printarr(arr);
+    }
+
+}
