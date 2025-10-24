@@ -1,0 +1,53 @@
+
+
+
+Brute force:
+package BinarySearchTree;
+
+public class SizeofthelargestBSTinaBinaryTree {
+
+    public static void main(String[] args) {
+
+    }
+
+    static int max_size = Integer.MIN_VALUE;
+
+    public static int largestBst1(Node root){
+
+        if(root==null) return 0;
+
+        if(isValidBST(root)==true){
+            int size = size(root);
+            max_size = Math.max(size, max_size);
+        }
+
+        largestBst1(root.left);
+        largestBst1(root.right);
+
+        return max_size;
+    }
+
+    public static int size(Node root){
+
+        if(root==null) return 0;
+
+        int left = size(root.left);
+        int right = size(root.right);
+
+        return left+right+1;
+    }
+
+    public static boolean isValidBST(Node root) {
+        return isValidBSTUtills(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    public static boolean isValidBSTUtills(Node root, int min, int max) {
+        if (root == null)
+            return true;
+
+        if (root.val < min || root.val > max)
+            return false;
+
+        return isValidBSTUtills(root.left, min, root.val) && isValidBSTUtills(root, root.val, max);
+    }
+}
