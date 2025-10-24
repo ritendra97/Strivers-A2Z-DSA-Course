@@ -1,0 +1,64 @@
+package Sorting;
+
+import java.util.ArrayList;
+
+public class MergeSort {
+
+    public static void main(String[] args){
+        int[] arr = {13, 46, 24, 52, 20, 9, 7, 11};
+        sorting(arr);
+    }
+
+    public static void sorting(int arr[]){
+        MergeSort(arr,0,arr.length-1);
+        printArray(arr);
+    }
+
+    public static void MergeSort(int[] arr, int low, int high){
+        if(low>=high){
+            return;
+        }
+
+        int mid = (low+high)/2;
+        MergeSort(arr,low,mid);
+        MergeSort(arr,mid+1,high);
+        merge(arr,low,high,mid);
+    }
+
+    public static void merge(int arr[], int low, int high, int mid){
+        ArrayList<Integer> ans = new ArrayList<>();
+        int i = low;
+        int j = mid+1;
+
+        while(i<=mid && j<=high){
+            if(arr[i]<arr[j]){
+                ans.add(arr[i]);
+                i++;
+            }else{
+                ans.add(arr[j]);
+                j++;
+            }
+        }
+
+        while(i<mid){
+            ans.add(arr[i]);
+            i++;
+        }
+
+        while(j<high){
+            ans.add(arr[j]);
+            j++;
+        }
+
+        for(int k = low;k<=high;k++){
+            arr[k] = ans.get(k-low);
+        }
+    }
+
+    private static void printArray(int[] arr) {
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+    }
+}
