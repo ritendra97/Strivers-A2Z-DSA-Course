@@ -1,0 +1,31 @@
+package Array;
+
+public class RotatearraybyKelements {
+
+    public static void main(String[] args){
+        int N = 7, array[] = {1,2,3,4,5,6,7} , k=2;
+        rotateArray(array,N,k);
+        for(int i = 0;i<N;i++){
+            System.out.print(array[i]+" ");
+        }
+    }
+
+    private static void rotateArray(int[] array, int n, int k) {
+        k = k%n;
+        if(k==0 || n==0) return;
+
+        reverse(array, n - k, n - 1); // Reverse last k elements
+        reverse(array, 0, n - k - 1); // Reverse first n-k elements
+        reverse(array, 0, n - 1); // Reverse the entire array;
+    }
+
+    public static void reverse(int arr[], int start, int end){
+        while (start<=end){
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
